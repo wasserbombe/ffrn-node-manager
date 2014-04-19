@@ -15,3 +15,5 @@ class Nodes(Base):
     email = Column(String)
     coord = Column(String)
 
+# create tables
+Base.metadata.create_all(engine)
