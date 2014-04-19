@@ -5,7 +5,7 @@ engine = create_engine('sqlite:///nodes.db')
 Base = declarative_base()
 
 class Nodes(Base):
-    __tablesname__ = 'nodes'
+    __tablename__ = 'nodes'
 
     nodeID = Column(Integer, primary_key=True)
     name = Column(String, unique=True)
