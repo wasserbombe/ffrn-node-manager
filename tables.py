@@ -14,6 +14,7 @@ class Nodes(Base):
     nickname = Column(String)
     email = Column(String)
     coords = Column(String)
+    token = Column(String)
 
 # create tables
 Base.metadata.create_all(engine)
