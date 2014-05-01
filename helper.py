@@ -43,7 +43,7 @@ class InputParser(object):
                 errors = True
 
         for key in data.keys():
-            value = data[key].replace(" ", "")
+            value = data[key]
             if key not in self.regex.keys():
                 unknown.append(key)
                 errors = True
