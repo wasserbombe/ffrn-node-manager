@@ -13,8 +13,12 @@ class InputParser(object):
     def __init__(self):
         pass
 
+    def __normalizeStrings(self, struct):
+        return dict((k.lower(), v) for k, v in struct.items())
+
     def getData(self, req):
-        return req.form.to_dict();
+        res = self.__normalizeStrings(req.form.to_dict())
+        return res
 
     def __validationError(self, vres):
         res = {}
