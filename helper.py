@@ -1,6 +1,7 @@
 import re
 import os
 import binascii
+import db as database
 
 class InputParser(object):
     regex = {
@@ -64,3 +65,15 @@ class InputParser(object):
 class Token(object):
     def getToken(self):
         return binascii.b2a_hex(os.urandom(15)).decode('utf-8')
+
+class Dedup(object):
+    db = database.DB()
+    def checkDups(self, hostname, mac, key):
+        if self.db.checkHostname(hostname):
+            return {'status':'error', 'type':'NodeEntryAlreadyExistsError','hostname': hostname}
+        elif self.db.checkMAC(mac):
+            return {'status':'error', 'type':'MacEntryAlreadyExistsError','mac': mac}
+        elif self.db.checkKey(key):
+            return {'status':'error', 'type':'KeyEntryAlreadyExistsError','key': key}
+        else:
+            return None

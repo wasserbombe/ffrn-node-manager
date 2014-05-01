@@ -1,12 +1,13 @@
 from flask import Flask, request, jsonify, render_template, abort
 import json
-from helper import InputParser, Token
+from helper import InputParser, Token, Dedup
 import db as database
 
 app = Flask(__name__)
 parser = InputParser()
 tokgen = Token()
 db = database.DB()
+dedup = Dedup()
 
 @app.route('/')
 def main_site():
@@ -21,6 +22,12 @@ def process_data():
         resp.status_code = 400
         return resp
     val = parser.getData(request)
+    # check for duplicates
+    ddres = dedup.checkDups(val['hostname'], val['mac'], val['key'])
+    if ddres:
+        resp = jsonify(**ddres)
+        resp.status_code = 409
+        return resp
     # if we reach this part the data should be correct
     resp = parser.getData(request)
     resp['token'] = tokgen.getToken()
