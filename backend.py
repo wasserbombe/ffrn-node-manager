@@ -14,7 +14,7 @@ def main_site():
         return render_template('index.html')
 
 @app.route('/api/node', methods=['POST'])
-def process_data():
+def process_new():
     # check for invalid data
     vres = parser.validate(request)
     if vres:
