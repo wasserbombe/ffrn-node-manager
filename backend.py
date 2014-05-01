@@ -14,20 +14,19 @@ def main_site():
 
 @app.route('/api/node', methods=['POST'])
 def process_data():
-    if request.method == 'POST':
-        vres = parser.validate(request)
-        if vres:
-            resp = jsonify(**vres)
-            resp.status_code = 400
-            return resp
-        else:
-            resp = parser.getData(request)
-            resp['token'] = tokgen.getToken()
-            db.addNode(resp)
-            resp['status'] = 'success'
-            return jsonify(**resp)
-    else:
-        abort(400)
+    # check for invalid data
+    vres = parser.validate(request)
+    if vres:
+        resp = jsonify(**vres)
+        resp.status_code = 400
+        return resp
+    val = parser.getData(request)
+    # if we reach this part the data should be correct
+    resp = parser.getData(request)
+    resp['token'] = tokgen.getToken()
+    db.addNode(resp)
+    resp['status'] = 'success'
+    return jsonify(**resp)
 
 if __name__ ==  "__main__":
     app.run(debug=True)
