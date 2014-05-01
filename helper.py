@@ -1,4 +1,6 @@
 import re
+import os
+import binascii
 
 class InputParser(object):
     regex = {
@@ -58,3 +60,7 @@ class InputParser(object):
             return self.__validationError(res)
         else:
             return None
+
+class Token(object):
+    def getToken(self):
+        return binascii.b2a_hex(os.urandom(15)).decode('utf-8')
