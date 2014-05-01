@@ -8,12 +8,12 @@ class Nodes(Base):
     __tablename__ = 'nodes'
 
     nodeID = Column(Integer, primary_key=True)
-    name = Column(String, unique=True)
-    fastdkey = Column(String, unique=True)
+    hostname = Column(String, unique=True)
+    key = Column(String, unique=True)
     mac = Column(String, unique=True)
-    nick = Column(String)
+    nickname = Column(String)
     email = Column(String)
-    coord = Column(String)
+    coords = Column(String)
 
 # create tables
 Base.metadata.create_all(engine)
