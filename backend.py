@@ -13,7 +13,6 @@ def main_site():
 def process_data():
     if request.method == 'POST':
         vres = parser.validate(request)
-        print(vres)
         if vres:
             resp = jsonify(**vres)
             resp.status_code = 400
