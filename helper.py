@@ -60,7 +60,8 @@ class InputParser(object):
             if key not in regex.keys():
                 unknown.append(key)
                 errors = True
-            elif not re.search(regex[key], value, re.MULTILINE):
+            elif not re.search(regex[key], value):
+                print(value)
                 invalid.append(key)
                 errors = True
 
