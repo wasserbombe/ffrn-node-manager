@@ -88,12 +88,12 @@ class Token(object):
 
 class Dedup(object):
     db = database.DB()
-    def checkDups(self, hostname, mac, key):
-        if self.db.checkHostname(hostname):
+    def checkDups(self, hostname, mac, key, token):
+        if self.db.checkHostname(hostname, token):
             return {'status':'error', 'type':'NodeEntryAlreadyExistsError','hostname': hostname}
-        elif self.db.checkMAC(mac):
+        elif self.db.checkMAC(mac, token):
             return {'status':'error', 'type':'MacEntryAlreadyExistsError','mac': mac}
-        elif self.db.checkKey(key):
+        elif self.db.checkKey(key, token):
             return {'status':'error', 'type':'KeyEntryAlreadyExistsError','key': key}
         else:
             return None

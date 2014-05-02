@@ -23,7 +23,7 @@ def process_new():
         resp.status_code = 400
         return resp
     # check for duplicates
-    ddres = dedup.checkDups(val['hostname'], val['mac'], val['key'])
+    ddres = dedup.checkDups(val['hostname'], val['mac'], val['key'], None)
     if ddres:
         resp = jsonify(**ddres)
         resp.status_code = 409
