@@ -35,5 +35,19 @@ def process_new():
     resp['status'] = 'success'
     return jsonify(**resp)
 
+@app.route('/api/node/<tok>', methods=['GET'])
+def process_get(tok):
+    vres = parser.validate(parser.getTokenRegex(), {'token': tok})
+    if vres:
+        resp = jsonify(**vres)
+        resp.status_code = 400
+        return resp
+    tres = token.checkToken(tok)
+    if tres:
+        resp = jsonify(**tres)
+        resp.status_code = 404
+        return resp
+    return jsonify(**db.getNode(tok))
+
 if __name__ ==  "__main__":
     app.run(debug=True)
