@@ -5,7 +5,7 @@ import db as database
 
 app = Flask(__name__)
 parser = InputParser()
-tokgen = Token()
+token = Token()
 db = database.DB()
 dedup = Dedup()
 
@@ -30,7 +30,7 @@ def process_new():
         return resp
     # if we reach this part the data should be correct
     resp = parser.getData(request)
-    resp['token'] = tokgen.getToken()
+    resp['token'] = token.getToken()
     db.addNode(resp)
     resp['status'] = 'success'
     return jsonify(**resp)
