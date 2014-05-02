@@ -42,7 +42,7 @@ class FFmapConfig(object):
                 temp['vpn'] = True
             if node['coords']:
                 temp['gps'] = node['coords']
-            json.update({node['mac']: temp})
+            json.update({node['mac'].lower(): temp})
         return json
 
     def genAliasJson(self):
