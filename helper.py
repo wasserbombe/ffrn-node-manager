@@ -13,7 +13,7 @@ class InputParser(object):
         'coords': r'''^(-?[0-9]{1,3}(\.[0-9]{1,15})? -?[0-9]{1,3}(\.[0-9]{1,15})?)?$'''
     }
 
-    regex_token = {'token': '''^[a-f0-9]{16}'''}
+    regex_token = {'token': r'''^[a-f0-9]{30}$'''}
 
     regex_with_token = regex.update(regex_token)
 
