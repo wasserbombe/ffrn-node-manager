@@ -2,9 +2,12 @@
 import db as database
 import json
 import os
+import configparser
 
-path_ffmap = './'
-path_fastd = './fastd/'
+config = configparser.ConfigParser()
+config.read('settings.conf')
+path_fastd = config['CONFIG']['fastd_path']
+path_ffmap = config['CONFIG']['ffmap_path']
 
 class FastdConfig(object):
     def __init__(self):
