@@ -29,7 +29,7 @@ def process_new():
         resp.status_code = 409
         return resp
     # if we reach this part the data should be correct
-    resp = parser.getData(request)
+    resp = val
     resp['token'] = token.getToken()
     db.addNode(resp)
     resp['status'] = 'success'
