@@ -13,8 +13,21 @@ class InputParser(object):
         'coords': r'''^(-?[0-9]{1,3}(\.[0-9]{1,15})? -?[0-9]{1,3}(\.[0-9]{1,15})?)?$'''
     }
 
+    regex_token = {'token': '''^[a-f0-9]{16}'''}
+
+    regex_with_token = regex.update(regex_token)
+
     def __init__(self):
         pass
+
+    def getNodeRegex(self):
+        return self.regex
+
+    def getTokenRegex(self):
+        return self.regex_token
+
+    def getNodeWithTokenRegex(self):
+        return self.regex_with_token
 
     def __normalizeStrings(self, struct):
         return dict((k.lower(), v) for k, v in struct.items())
