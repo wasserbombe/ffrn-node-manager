@@ -15,8 +15,6 @@ class InputParser(object):
 
     regex_token = {'token': r'''^[a-f0-9]{30}$'''}
 
-    regex_with_token = regex.update(regex_token)
-
     def __init__(self):
         pass
 
@@ -27,7 +25,10 @@ class InputParser(object):
         return self.regex_token
 
     def getNodeWithTokenRegex(self):
-        return self.regex_with_token
+        x = self.regex.copy()
+        y = self.regex_token.copy()
+        x.update(y)
+        return x
 
     def __normalizeStrings(self, struct):
         return dict((k.lower(), v) for k, v in struct.items())
