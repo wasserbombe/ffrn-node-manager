@@ -16,12 +16,12 @@ def main_site():
 @app.route('/api/node', methods=['POST'])
 def process_new():
     # check for invalid data
-    vres = parser.validate(request, parser.getNodeRegex())
+    val = parser.getData(request)
+    vres = parser.validate(parser.getNodeRegex(), val)
     if vres:
         resp = jsonify(**vres)
         resp.status_code = 400
         return resp
-    val = parser.getData(request)
     # check for duplicates
     ddres = dedup.checkDups(val['hostname'], val['mac'], val['key'])
     if ddres:

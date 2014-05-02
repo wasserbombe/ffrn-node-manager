@@ -43,13 +43,12 @@ class InputParser(object):
         res['validationResult'] = vres
         return res
 
-    def validate(self, regex, req):
+    def validate(self, regex, data):
         invalid = []
         missing = []
         unknown = []
         errors = False
         res = {}
-        data = self.getData(req)
 
         for key in regex.keys():
             if not data[key]:
