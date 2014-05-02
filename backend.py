@@ -16,7 +16,7 @@ def main_site():
 @app.route('/api/node', methods=['POST'])
 def process_new():
     # check for invalid data
-    vres = parser.validate(request)
+    vres = parser.validate(request, parser.getNodeRegex())
     if vres:
         resp = jsonify(**vres)
         resp.status_code = 400
