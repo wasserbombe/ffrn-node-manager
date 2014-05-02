@@ -49,5 +49,24 @@ def process_get(tok):
         return resp
     return jsonify(**db.getNode(tok))
 
+@app.route('/api/node/<tok>', methods=['PUT'])
+def process_update(tok):
+    val = parser.getData(request)
+    val.update({'token': tok})
+    vres = parser.validate(parser.getNodeWithTokenRegex(), val)
+    if vres:
+        resp = jsonify(**vres)
+        resp.status_code = 400
+        return resp
+    ddres = dedup.checkDups(val['hostname'], val['mac'], val['key'], val['token'])
+    if ddres:
+        resp = jsonify(**ddres)
+        resp.status_code = 409
+        return resp
+    db.updateNode(val)
+    resp = val
+    resp['status'] = 'success'
+    return jsonify(**resp)
+
 if __name__ ==  "__main__":
     app.run(debug=True)
