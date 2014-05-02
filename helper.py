@@ -62,7 +62,6 @@ class InputParser(object):
                 unknown.append(key)
                 errors = True
             elif not re.search(regex[key], value):
-                print(value)
                 invalid.append(key)
                 errors = True
 
