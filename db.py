@@ -18,6 +18,13 @@ class DB(object):
             d[column.name] = getattr(row, column.name)
         return d
 
+    def __dictlist(self, res):
+        """transform table object into a list of dicts"""
+        l = []
+        for row in res:
+            l.append(self.__row2dict(row))
+        return l
+
     def addNode(self, node):
         try:
             self.session.add(tables.Nodes(**node))
@@ -29,6 +36,12 @@ class DB(object):
     def getNode(self, token):
         try:
             return self.__row2dict(self.session.query(tables.Nodes).filter(tables.Nodes.token == token).one())
+        except:
+            raise
+
+    def getNodeList(self):
+        try:
+            return self.__dictlist(self.session.query(tables.Nodes).all())
         except:
             raise
 
