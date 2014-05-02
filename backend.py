@@ -1,9 +1,13 @@
 from flask import Flask, request, jsonify, render_template, abort
+from flask_mail import Mail
 import json
 from helper import InputParser, Token, Dedup
 import db as database
+from mail import getMail
+
 
 app = Flask(__name__)
+mail = Mail(app)
 parser = InputParser()
 token = Token()
 db = database.DB()
@@ -32,6 +36,7 @@ def process_new():
     resp = val
     resp['token'] = token.getToken()
     db.addNode(resp)
+    mail.send(getMail(resp))
     resp['status'] = 'success'
     return jsonify(**resp)
 
