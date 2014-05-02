@@ -5,7 +5,7 @@ import json
 from helper import InputParser, Token, Dedup
 import db as database
 from mail import getMail
-
+from generator import FFmapConfig, FastdConfig
 
 app = Flask(__name__)
 mail = Mail(app)
@@ -13,6 +13,8 @@ parser = InputParser()
 token = Token()
 db = database.DB()
 dedup = Dedup()
+ffmap = FFmapConfig()
+fastd = FastdConfig()
 
 @app.route('/')
 def main_site():
@@ -37,6 +39,8 @@ def process_new():
     resp = val
     resp['token'] = token.getToken()
     db.addNode(resp)
+    ffmap.genAliasJson()
+    fastd.genFastdConf()
     mail.send(getMail(resp))
     resp['status'] = 'success'
     return jsonify(**resp)
@@ -70,6 +74,8 @@ def process_update(tok):
         resp.status_code = 409
         return resp
     db.updateNode(val)
+    ffmap.genAliasJson()
+    fastd.genFastdConf()
     resp = val
     resp['status'] = 'success'
     return jsonify(**resp)
