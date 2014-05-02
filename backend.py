@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from flask import Flask, request, jsonify, render_template, abort
 from flask_mail import Mail
 import json
