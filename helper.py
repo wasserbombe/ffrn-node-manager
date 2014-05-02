@@ -52,7 +52,7 @@ class InputParser(object):
         res = {}
 
         for key in regex.keys():
-            if not data[key]:
+            if key not in data.keys():
                 missing.append(key)
                 errors = True
 
