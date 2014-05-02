@@ -76,8 +76,14 @@ class InputParser(object):
             return None
 
 class Token(object):
+    db = database.DB()
     def getToken(self):
         return binascii.b2a_hex(os.urandom(15)).decode('utf-8')
+    def checkToken(self, token):
+        if self.db.checkToken(token):
+            return None
+        else:
+            return {'status':'error','type':'NodeNotFoundError','token': token}
 
 class Dedup(object):
     db = database.DB()
