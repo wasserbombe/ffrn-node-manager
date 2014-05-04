@@ -38,8 +38,6 @@ class FFmapConfig(object):
         for node in node_list:
             temp = {}
             temp['name'] = node['hostname']
-            if node['key']:
-                temp['vpn'] = True
             if node['coords']:
                 temp['gps'] = node['coords']
             json.update({node['mac'].lower(): temp})
