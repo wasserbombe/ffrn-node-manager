@@ -37,7 +37,7 @@ class FFmapConfig(object):
         mlist = [int(x, 16) for x in mlist]
         mlist[0] += 0x02
         mlist[3] = ((mlist[3] + 1) % 0x100)
-        return ':'.join([format(x , 'x') for x in mlist])
+        return ':'.join(['{:02x}'.format(x) for x in mlist])
 
     def genJson(self):
         node_list = self.db.getNodeList()
