@@ -32,6 +32,13 @@ class FFmapConfig(object):
     def __init__(self):
         self.db = database.DB()
 
+    def calcMAC(self, mac):
+        mlist = mac.split(':')
+        mlist = [int(x, 16) for x in mlist]
+        mlist[0] += 0x02
+        mlist[3] = ((mlist[3] + 1) % 0x100)
+        return ':'.join([format(x , 'x') for x in mlist])
+
     def genJson(self):
         node_list = self.db.getNodeList()
         json = {}
@@ -40,7 +47,7 @@ class FFmapConfig(object):
             temp['name'] = node['hostname']
             if node['coords']:
                 temp['gps'] = node['coords']
-            json.update({node['mac'].lower(): temp})
+            json.update({self.calcMAC(node['mac'].lower()): temp})
         return json
 
     def genAliasJson(self):
