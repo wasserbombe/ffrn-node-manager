@@ -2,6 +2,7 @@
 import db as database
 import json
 import os
+from glob import glob
 import configparser
 
 config = configparser.ConfigParser()
@@ -13,8 +14,18 @@ class FastdConfig(object):
     def __init__(self):
         self.db = database.DB()
 
+    def removeOldFiles(self):
+        data = self.db.getNodeList()
+        nodes = [e['hostname'] for e in data]
+        current_files = glob(os.path.join(path_fastd, '*.conf'))
+        new_files = [ e + '.config' for e in nodes]
+        for e in current_files:
+            if e not in new_files:
+                os.remove(e)
+
     def genFastdConf(self):
         node_list = self.db.getNodeList()
+        self.removeOldFiles()
         for node in node_list:
             with open(os.path.abspath(os.path.join(path_fastd, node['hostname'] + '.conf')), 'w') as f:
                 conf = """\
