@@ -5,7 +5,7 @@ import json
 from helper import InputParser, Token, Dedup
 import db as database
 from mail import getMail
-from generator import FFmapConfig, FastdConfig
+from generator import FFmapConfig, FastdConfig, aliasMap
 
 app = Flask(__name__)
 mail = Mail(app)
