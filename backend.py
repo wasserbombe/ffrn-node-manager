@@ -15,6 +15,7 @@ db = database.DB()
 dedup = Dedup()
 ffmap = FFmapConfig()
 fastd = FastdConfig()
+alias = aliasMap()
 
 @app.route('/')
 def main_site():
@@ -41,6 +42,7 @@ def process_new():
     db.addNode(resp)
     ffmap.genAliasJson()
     fastd.genFastdConf()
+    alias.genAliasMap()
     mail.send(getMail(resp))
     resp['status'] = 'success'
     return jsonify(**resp)
@@ -76,6 +78,7 @@ def process_update(tok):
     db.updateNode(val)
     ffmap.genAliasJson()
     fastd.genFastdConf()
+    alias.genAliasMap()
     resp = val
     resp['status'] = 'success'
     return jsonify(**resp)

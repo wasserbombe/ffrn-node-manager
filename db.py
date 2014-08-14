@@ -78,3 +78,6 @@ class DB(object):
             return True
         else:
             return False
+
+    def getNodeMailMap(self):
+        return self.session.query(tables.Nodes.hostname, tables.Nodes.email).all()
