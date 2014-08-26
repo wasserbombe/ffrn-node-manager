@@ -2,7 +2,7 @@
 from flask_mail import Message
 
 def getMail(node):
-    msg = Message("Dein Freifunk Knoten", sender=("FFRN Node Registration", "noreply@freifunk-rhein-neckar.de"), recipients = [node['email']])
+    msg = Message("Dein Freifunk Knoten", sender=("FFRN Node Registration", "info@freifunk-rhein-neckar.de"), recipients = [node['email']])
     msg.body = '''
 Hey {nickname},
 
