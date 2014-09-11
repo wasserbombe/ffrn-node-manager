@@ -5,3 +5,27 @@ body {
 * {
     border-radius: 0 !important;
 }
+
+.btn-success {
+    background-color: #ff4a59;
+    border-color: #616161;
+}
+
+.btn-success:hover {
+    background-color: #ff4a59;
+    border-color: #616161;
+}
+
+.btn-primary {
+    background-color: #818181;
+    border-color: #616161;
+}
+
+.btn-primary:hover {
+    background-color: #818181;
+    border-color: #616161;
+}
+
+.glyphicon {
+    padding-right: 5px;
+}
