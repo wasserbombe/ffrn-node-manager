@@ -7,7 +7,7 @@ body {
 }
 
 .btn-success, .btn-success:hover, .btn-success:focus, .btn-success:active {
-    background-color: #ff4a59;
+/*    background-color: #ff4a59;*/
     border: none;
 }
 .btn-primary, .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
