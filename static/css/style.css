@@ -6,26 +6,14 @@ body {
     border-radius: 0 !important;
 }
 
-.btn-success {
+.btn-success, .btn-success:hover, .btn-success:focus, .btn-success:active {
     background-color: #ff4a59;
-    border-color: #616161;
+    border: none;
 }
-
-.btn-success:hover {
-    background-color: #ff4a59;
-    border-color: #616161;
-}
-
-.btn-primary {
+.btn-primary, .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
     background-color: #818181;
-    border-color: #616161;
+    border: none;
 }
-
-.btn-primary:hover {
-    background-color: #818181;
-    border-color: #616161;
-}
-
 .glyphicon {
     padding-right: 5px;
 }
