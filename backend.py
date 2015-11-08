@@ -88,7 +88,6 @@ def process_update(tok):
 def recover_token():
     val = parser.getData(request)
     vres = parser.validate(parser.getRecoveryRegex(), val)
-    print(vres)
     if vres:
         resp = jsonify(**vres)
         resp.status_code = 400
@@ -100,7 +99,7 @@ def recover_token():
         return resp
     else:
         resp_mail = db.getNodeMac(val['mac'])
-        mail.send(getMail(resp))
+        mail.send(getMail(resp_mail))
         resp = val
         resp['status'] = 'success'
         return jsonify(**resp)
