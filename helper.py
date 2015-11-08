@@ -104,11 +104,13 @@ class Dedup(object):
 class Recover(object):
     db = database.DB()
     def checkCombination(self, email, mac):
-        reg_data = self.db.getNodeMac(mac)
+        try:
+            reg_data = self.db.getNodeMac(mac)
+        except:
+            return {'status':'error', 'type':'MacEntryDoesNotExistError', 'mac':mac }
+
         if reg_data:
             if reg_data['email'] == email:
                 return None
             else:
                 return {'status':'error', 'type':'EmailEntryDoesNotMatchError', 'email':email }
-        else:
-            return {'status':'error', 'type':'MacEntryDoesNotExistError', 'mac':mac }
