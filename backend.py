@@ -2,7 +2,7 @@
 from flask import Flask, request, jsonify, render_template, abort
 from flask_mail import Mail
 import json
-from helper import InputParser, Token, Dedup
+from helper import InputParser, Token, Dedup, Recover
 import db as database
 from mail import getMail
 from generator import FFmapConfig, FastdConfig, aliasMap
@@ -13,6 +13,7 @@ parser = InputParser()
 token = Token()
 db = database.DB()
 dedup = Dedup()
+recover = Recover()
 ffmap = FFmapConfig()
 fastd = FastdConfig()
 alias = aliasMap()
@@ -82,6 +83,27 @@ def process_update(tok):
     resp = val
     resp['status'] = 'success'
     return jsonify(**resp)
+
+@app.route('/api/recover', methods=['POST'])
+def recover_token():
+    val = parser.getData(request)
+    vres = parser.validate(parser.getRecoveryRegex(), val)
+    print(vres)
+    if vres:
+        resp = jsonify(**vres)
+        resp.status_code = 400
+        return resp
+    rres = recover.checkCombination(val['email'],val['mac'])
+    if rres:
+        resp = jsonify(**rres)
+        resp.status_code = 404
+        return resp
+    else:
+        resp_mail = db.getNodeMac(val['mac'])
+        mail.send(getMail(resp))
+        resp = val
+        resp['status'] = 'success'
+        return jsonify(**resp)
 
 if __name__ ==  "__main__":
     app.run(debug=True)

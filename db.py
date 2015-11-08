@@ -39,6 +39,12 @@ class DB(object):
         except:
             raise
 
+    def getNodeMac(self, mac):
+        try:
+            return self.__row2dict(self.session.query(tables.Nodes).filter(tables.Nodes.mac == mac).one())
+        except:
+            raise
+
     def getNodeList(self):
         try:
             return self.__dictlist(self.session.query(tables.Nodes).all())

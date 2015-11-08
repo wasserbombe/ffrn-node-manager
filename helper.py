@@ -22,6 +22,9 @@ class InputParser(object):
     def getNodeRegex(self):
         return self.regex
 
+    def getRecoveryRegex(self):
+        return {'email': self.regex['email'], 'mac': self.regex['mac']}
+
     def getTokenRegex(self):
         return self.regex_token
 
@@ -97,3 +100,15 @@ class Dedup(object):
             return {'status':'error', 'type':'KeyEntryAlreadyExistsError','key': key}
         else:
             return None
+
+class Recover(object):
+    db = database.DB()
+    def checkCombination(self, email, mac):
+        reg_data = self.db.getNodeMac(mac)
+        if reg_data:
+            if reg_data['email'] == email:
+                return None
+            else:
+                return {'status':'error', 'type':'EmailEntryDoesNotMatchError', 'email':email }
+        else:
+            return {'status':'error', 'type':'MacEntryDoesNotExistError', 'mac':mac }
