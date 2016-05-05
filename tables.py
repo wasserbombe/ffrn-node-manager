@@ -14,7 +14,6 @@ class Nodes(Base):
     mac = Column(String, unique=True)
     nickname = Column(String)
     email = Column(String)
-    coords = Column(String)
     token = Column(String)
 
 # create tables

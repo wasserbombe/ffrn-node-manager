@@ -18,8 +18,7 @@
             hostname: "Knotennamen dürfen maximal 32 Zeichen lang sein und nur Klein- und Großbuchstaben, sowie Ziffern, - und _ enthalten.",
             email: "Die angegebene E-Mail-Adresse ist ungültig.",
             nickname: "Nicknames dürfen maximal 64 Zeichen lang sein und nur Klein- und Großbuchstaben, sowie Ziffern, - und _ enthalten. Umlaute sind erlaubt.",
-            mac: "Die angegebene MAC-Adresse ist ungültig. Format: aa:bb:cc:dd:ee:ff",
-            coords: "Bitte gib die Koordinaten wie folgt an, Beispiel: 54.326230588201 10.101561821008"
+            mac: "Die angegebene MAC-Adresse ist ungültig. Format: aa:bb:cc:dd:ee:ff"
         };
 
         function feedback(id, cls, msg) {
@@ -131,7 +130,6 @@
             var key = $("#node-form input[name=key]").val();
             var email = $("#node-form input[name=email]").val();
             var nickname= $("#node-form input[name=nickname]").val();
-            var coords = $("#node-form input[name=coords]").val();
             var mac = $("#node-form input[name=mac]").val();
 
             var url = "/api/node";
@@ -148,7 +146,6 @@
                     key: key,
                     email: email,
                     nickname: nickname,
-                    coords: coords,
                     mac: mac
                 },
                 success: function (data) {
@@ -317,10 +314,6 @@
                         <th>Kontakt - E-Mail-Adresse</th>
                         <td class="value email"></td>
                     </tr>
-                    <tr>
-                        <th>Koordinaten des Knotens</th>
-                        <td class="value coords"></td>
-                    </tr>
                 </table>
             </div>
 
@@ -399,17 +392,6 @@
                         <label class="control-label" for="email">Kontakt - E-Mail-Adresse</label>
                         <input type="text" disabled="disabled" class="form-control" name="email" placeholder="Kontakt - E-Mail-Adresse" />
                         <span class="feedback help-block"></span>
-                    </div>
-                    <div class="form-group coords">
-                        <label class="control-label" for="coords">Koordinaten des Knotens (freiwillig)</label>
-                        <input type="text" disabled="disabled" class="form-control" name="coords" placeholder="Koordinaten" />
-                        <span class="feedback help-block"></span>
-                        <span class="help-block">
-                            Du kannst die Koordinaten in der <a target="_blank" href="http://map.freifunk-rhein-neckar.de">Knotenkarte</a>
-                            rausfinden, indem Du zum Standort des Knotens gehst, dann oben "Koordinaten beim
-                            nächsten Klick anzeigen" klickst und dann auf der Karte auf den genauen Standort
-                            klickst.
-                        </span>
                     </div>
                     <button id="node-cancel" class="btn btn-secondary" type="reset" disabled="disabled">
                         <span class="glyphicon glyphicon-remove"></span>

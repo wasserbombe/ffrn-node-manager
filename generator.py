@@ -33,7 +33,6 @@ class FastdConfig(object):
                 conf = """\
 #Hostname: {hostname}
 #MAC: {mac}
-#Koordinaten: {coords}
 #Nick: {nickname}
 #Mail: {email}
 #Token: {token}
@@ -58,8 +57,6 @@ class FFmapConfig(object):
         for node in node_list:
             temp = {}
             temp['name'] = node['hostname']
-            if node['coords']:
-                temp['gps'] = node['coords']
             json.update({self.calcMAC(node['mac'].lower()): temp})
         return json
 

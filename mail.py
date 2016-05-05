@@ -13,7 +13,6 @@ Die Daten deines Knotens lauten:
     Hostname:       {hostname}
     MAC:            {mac}
     VPN Key:        {key}
-    Koordinaten:    {coords}
     Nick:           {nickname}
     Mail:           {email}
     Token:          {token}
